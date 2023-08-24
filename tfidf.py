@@ -5,6 +5,8 @@ import nltk
 import re
 import string
 from nltk.stem import WordNetLemmatizer
+import scipy.io
+import os
 
 test_csv = pd.read_csv('data/Test.csv')
 train_csv = pd.read_csv('data/Train.csv')
@@ -46,4 +48,8 @@ x_test_tf = tfidf.transform(test_x)
 print("n_samples: %d, n_features: %d" % x_train_tf.shape)
 print("n_samples: %d, n_features: %d" % x_test_tf.shape)
 
+train_path = os.path.join('data', 'x_train_tf.mtx')
+test_path = os.path.join('data', 'x_test_tf.mtx')
+scipy.io.mmwrite(train_path, x_train_tf)
+scipy.io.mmwrite(test_path, x_test_tf)
 
